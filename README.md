@@ -1,5 +1,7 @@
 # mcp-scan
 
+> **Beta** — API and rule set may change before the 0.1.0 stable release.
+
 Security scanner for Model Context Protocol (MCP) servers. Detects vulnerabilities via static AST analysis of Python source code and dynamic probing of live MCP servers.
 
 ## Detection Rules
