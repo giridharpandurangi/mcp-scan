@@ -1,0 +1,69 @@
+name: mcp-scan
+description: Run mcp-scan static analysis to detect security vulnerabilities in MCP servers
+
+inputs:
+  path:
+    description: Source directory or file to scan
+    required: false
+    default: '.'
+  severity:
+    description: Minimum severity level to fail on (CRITICAL, HIGH, MEDIUM, LOW, INFO)
+    required: false
+    default: 'HIGH'
+  format:
+    description: Output format (rich, json, sarif, markdown)
+    required: false
+    default: 'rich'
+  args:
+    description: Additional CLI arguments to pass to mcp-scan
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Install mcp-scan
+      shell: bash
+      run: pip install mcp-scan
+
+    - name: Run mcp-scan static analysis
+      id: mcp-scan
+      shell: bash
+      run: |
+        # Determine output file path when format requires artifact upload
+        FORMAT="${{ inputs.format }}"
+        OUTPUT_ARGS=""
+        OUTPUT_FILE=""
+
+        if [[ "$FORMAT" == "sarif" || "$FORMAT" == "json" ]]; then
+          OUTPUT_FILE="mcp-scan-results.$FORMAT"
+          OUTPUT_ARGS="--output $OUTPUT_FILE"
+        fi
+
+        # Run mcp-scan; exit code 1 means HIGH+ findings, exit code 2 means error
+        set +e
+        mcp-scan static \
+          --path "${{ inputs.path }}" \
+          --severity "${{ inputs.severity }}" \
+          --format "$FORMAT" \
+          $OUTPUT_ARGS \
+          ${{ inputs.args }}
+        EXIT_CODE=$?
+        set -e
+
+        echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
+
+        if [[ -n "$OUTPUT_FILE" ]]; then
+          echo "output_file=$OUTPUT_FILE" >> "$GITHUB_OUTPUT"
+        fi
+
+        # Exit with the original exit code so the step fails on findings
+        exit $EXIT_CODE
+
+    - name: Upload scan results as artifact
+      if: always() && (inputs.format == 'sarif' || inputs.format == 'json')
+      uses: actions/upload-artifact@v4
+      with:
+        name: mcp-scan-results
+        path: mcp-scan-results.${{ inputs.format }}
+        if-no-files-found: warn

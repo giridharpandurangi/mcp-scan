@@ -1,0 +1,35 @@
+{
+  "findings": [
+    {
+      "rule_id": "MCP001",
+      "severity": "HIGH",
+      "target": "src/server.py",
+      "location": "src/server.py:42",
+      "message": "Tainted URL passed to HTTP client — potential SSRF. Sink: httpx.get",
+      "remediation": "Validate the URL against an allowlist before passing it to an HTTP client.",
+      "confidence": "HIGH"
+    },
+    {
+      "rule_id": "MCP010",
+      "severity": "CRITICAL",
+      "target": "src/server.py",
+      "location": "src/server.py:10",
+      "message": "Hardcoded API key assigned to variable api_key.",
+      "remediation": "Use environment variables or a secrets manager instead of hardcoding credentials.",
+      "confidence": "HIGH"
+    },
+    {
+      "rule_id": "MCP021",
+      "severity": "HIGH",
+      "target": "src/server.py",
+      "location": "src/server.py:5",
+      "message": "Tool description contains prompt injection phrase: ignore previous instructions",
+      "remediation": "Remove or rewrite the tool description to avoid injection phrases.",
+      "confidence": "HIGH"
+    }
+  ],
+  "scan_mode": "static",
+  "target": "src/server.py",
+  "timestamp": "2024-01-15T12:00:00+00:00",
+  "tool_version": "0.1.0"
+}

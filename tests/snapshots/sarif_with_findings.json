@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "mcp-scan",
+          "version": "0.1.0",
+          "rules": [
+            {
+              "id": "MCP001",
+              "name": "TaintedUrlSsrf",
+              "shortDescription": {
+                "text": "Tainted URL passed to HTTP client \u2014 potential SSRF. Sink: httpx.get"
+              },
+              "properties": {
+                "tags": [
+                  "security"
+                ]
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/918.html"
+            },
+            {
+              "id": "MCP010",
+              "name": "HardcodedApiKey",
+              "shortDescription": {
+                "text": "Hardcoded API key assigned to variable api_key."
+              },
+              "properties": {
+                "tags": [
+                  "security"
+                ]
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/798.html"
+            },
+            {
+              "id": "MCP021",
+              "name": "PromptInjectionInDescription",
+              "shortDescription": {
+                "text": "Tool description contains prompt injection phrase: ignore previous instructions"
+              },
+              "properties": {
+                "tags": [
+                  "security"
+                ]
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/116.html"
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "MCP001",
+          "level": "error",
+          "message": {
+            "text": "Tainted URL passed to HTTP client \u2014 potential SSRF. Sink: httpx.get"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/server.py"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MCP010",
+          "level": "error",
+          "message": {
+            "text": "Hardcoded API key assigned to variable api_key."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/server.py"
+                },
+                "region": {
+                  "startLine": 10
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MCP021",
+          "level": "error",
+          "message": {
+            "text": "Tool description contains prompt injection phrase: ignore previous instructions"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/server.py"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+                                  mcp-scan results — src/server.py                                  
+┏━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Rule ID ┃ Severity ┃ Location         ┃ Message                                                  ┃
+┡━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ MCP001  │ HIGH     │ src/server.py:42 │ Tainted URL passed to HTTP client — potential SSRF.      │
+│         │          │                  │ Sink: httpx.get                                          │
+│ MCP010  │ CRITICAL │ src/server.py:10 │ Hardcoded API key assigned to variable api_key.          │
+│ MCP021  │ HIGH     │ src/server.py:5  │ Tool description contains prompt injection phrase:       │
+│         │          │                  │ ignore previous instructions                             │
+└─────────┴──────────┴──────────────────┴──────────────────────────────────────────────────────────┘
