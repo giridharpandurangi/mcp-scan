@@ -1,10 +1,10 @@
-# mcp-scan
+# mcp-bandit
 
 > **Beta** — install via `pip install mcp-bandit`. API and rule set may change before the 0.1.0 stable release.
 
 Security scanner for Model Context Protocol (MCP) servers. Detects vulnerabilities via static AST analysis of Python source code and dynamic probing of live MCP servers.
 
-> 37% of public MCP servers have SSRF vulnerabilities and there's no equivalent of `npm audit` for the MCP ecosystem. mcp-audit fills that gap.
+> 37% of public MCP servers have SSRF vulnerabilities and there's no equivalent of `npm audit` for the MCP ecosystem. mcp-bandit fills that gap.
 
 ## Installation
 
@@ -27,10 +27,10 @@ Requires Python 3.11+.
 
 ```bash
 # Scan a Python MCP server for vulnerabilities
-mcp-scan static --path my_server.py
+mcp-bandit static --path my_server.py
 
 # Scan a whole directory, fail on HIGH+ findings
-mcp-scan static --path src/ --severity HIGH --format sarif
+mcp-bandit static --path src/ --severity HIGH --format sarif
 ```
 
 ## Detection Rules
@@ -57,8 +57,8 @@ mcp-scan static --path src/ --severity HIGH --format sarif
 Scan a Python source file or directory:
 
 ```bash
-mcp-scan static --path src/
-mcp-scan static --path my_server.py
+mcp-bandit static --path src/
+mcp-bandit static --path my_server.py
 ```
 
 ### Dynamic probing
@@ -67,10 +67,10 @@ Connect to a running MCP server and send crafted probe inputs:
 
 ```bash
 # stdio transport (command string)
-mcp-scan dynamic --target "python my_server.py"
+mcp-bandit dynamic --target "python my_server.py"
 
 # HTTP transport
-mcp-scan dynamic --target "http://localhost:8080"
+mcp-bandit dynamic --target "http://localhost:8080"
 ```
 
 > **Warning**: Dynamic probing sends crafted inputs to live MCP tools. Always run against a development or staging server, never production.
@@ -78,13 +78,13 @@ mcp-scan dynamic --target "http://localhost:8080"
 ### Both modes combined
 
 ```bash
-mcp-scan all --path src/ --target "python my_server.py"
+mcp-bandit all --path src/ --target "python my_server.py"
 ```
 
 ### List all rules
 
 ```bash
-mcp-scan rules
+mcp-bandit rules
 ```
 
 ## CLI Options
@@ -119,24 +119,24 @@ mcp-scan rules
 
 ```bash
 # Rich terminal table (default)
-mcp-scan static --path src/
+mcp-bandit static --path src/
 
 # JSON (ScanResult schema)
-mcp-scan static --path src/ --format json
+mcp-bandit static --path src/ --format json
 
 # SARIF 2.1.0 (for GitHub Code Scanning)
-mcp-scan static --path src/ --format sarif --output results.sarif
+mcp-bandit static --path src/ --format sarif --output results.sarif
 
 # Markdown report
-mcp-scan static --path src/ --format markdown --output report.md
+mcp-bandit static --path src/ --format markdown --output report.md
 ```
 
 ## Configuration File
 
-Create a `mcp-scan.toml` (or `.json`) file to set persistent options:
+Create a `mcp-bandit.toml` (or `.json`) file to set persistent options:
 
 ```toml
-# mcp-scan.toml
+# mcp-bandit.toml
 disabled_rules = ["MCP002"]
 exclude_paths = ["tests/**", "docs/**"]
 min_severity = "MEDIUM"
@@ -155,7 +155,7 @@ min_severity = "HIGH"
 Load it with:
 
 ```bash
-mcp-scan static --path src/ --config mcp-scan.toml
+mcp-bandit static --path src/ --config mcp-bandit.toml
 ```
 
 CLI flags always override config file values.
@@ -170,11 +170,11 @@ trusted_validators = ["validate_url", "is_safe_path", "check_host"]
 
 ## GitHub Action
 
-Add mcp-scan to your CI pipeline:
+Add mcp-bandit to your CI pipeline:
 
 ```yaml
 # .github/workflows/security.yml
-- name: Run mcp-scan
+- name: Run mcp-bandit
   uses: ./.github/actions/mcp-scan
   with:
     path: src/

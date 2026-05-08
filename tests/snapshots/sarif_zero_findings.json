@@ -5,7 +5,7 @@
     {
       "tool": {
         "driver": {
-          "name": "mcp-scan",
+          "name": "mcp-bandit",
           "version": "0.1.0",
           "rules": []
         }

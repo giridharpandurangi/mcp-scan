@@ -1,4 +1,4 @@
-# mcp-scan Security Report
+# mcp-bandit Security Report
 
 **Target:** `src/clean.py`
 **Scan mode:** static

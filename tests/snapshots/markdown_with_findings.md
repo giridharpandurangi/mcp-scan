@@ -1,4 +1,4 @@
-# mcp-scan Security Report
+# mcp-bandit Security Report
 
 **Target:** `src/server.py`
 **Scan mode:** static

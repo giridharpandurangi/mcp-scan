@@ -30,7 +30,7 @@ from mcp_scan.rules import discover_rules
 from mcp_scan.scanner import Scanner
 
 app = typer.Typer(
-    name="mcp-scan",
+    name="mcp-bandit",
     help="Security scanner for Model Context Protocol (MCP) servers.",
     no_args_is_help=True,
     add_completion=False,
@@ -159,7 +159,7 @@ def _build_config(
         if rule not in all_ids:
             typer.echo(
                 f"Error: unknown rule '{rule}'. "
-                f"Run 'mcp-scan rules' to see available rules.",
+                f"Run 'mcp-bandit rules' to see available rules.",
                 err=True,
             )
             raise typer.Exit(2)
@@ -258,7 +258,7 @@ def dynamic(
     # Confirmation prompt for --allow-destructive
     if allow_destructive and not yes:
         typer.echo(
-            "WARNING: --allow-destructive is enabled. mcp-scan will send probe payloads\n"
+            "WARNING: --allow-destructive is enabled. mcp-bandit will send probe payloads\n"
             "to tools whose names suggest destructive operations (delete*, drop*, write*, etc.).\n"
             "This may cause unintended side effects on the target server.",
             err=True,
@@ -320,7 +320,7 @@ def scan_all(
 
     if allow_destructive and not yes:
         typer.echo(
-            "WARNING: --allow-destructive is enabled. mcp-scan will send probe payloads\n"
+            "WARNING: --allow-destructive is enabled. mcp-bandit will send probe payloads\n"
             "to tools whose names suggest destructive operations.",
             err=True,
         )
@@ -360,7 +360,7 @@ def rules() -> None:
     from rich.table import Table
 
     console = Console(highlight=False, width=120)
-    table = Table(title="mcp-scan Detection Rules", show_header=True, header_style="bold")
+    table = Table(title="mcp-bandit Detection Rules", show_header=True, header_style="bold")
     table.add_column("Rule ID", style="bold", no_wrap=True)
     table.add_column("Severity", no_wrap=True)
     table.add_column("CWE", no_wrap=True)
@@ -385,10 +385,10 @@ def rules() -> None:
 def _version_callback(value: bool) -> None:
     if value:
         try:
-            version = importlib.metadata.version("mcp-scan")
+            version = importlib.metadata.version("mcp-bandit")
         except importlib.metadata.PackageNotFoundError:
             version = "0.0.0"
-        typer.echo(f"mcp-scan {version}")
+        typer.echo(f"mcp-bandit {version}")
         raise typer.Exit(0)
 
 
@@ -404,7 +404,7 @@ def main(
         ),
     ] = False,
 ) -> None:
-    """mcp-scan — Security scanner for Model Context Protocol (MCP) servers."""
+    """mcp-bandit — Security scanner for Model Context Protocol (MCP) servers."""
 
 
 if __name__ == "__main__":  # pragma: no cover

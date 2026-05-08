@@ -241,7 +241,7 @@ class TestSarifFormatter:
         formatter = SarifFormatter()
         doc = json.loads(formatter.format(result_with_findings))
         driver = doc["runs"][0]["tool"]["driver"]
-        assert driver["name"] == "mcp-scan"
+        assert driver["name"] == "mcp-bandit"
         assert driver["version"] == "0.1.0"
 
 

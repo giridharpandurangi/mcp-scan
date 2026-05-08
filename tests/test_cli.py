@@ -1,6 +1,6 @@
-﻿"""CLI tests using typer.testing.CliRunner.
+"""CLI tests using typer.testing.CliRunner.
 
-Task 15.1 (optional) — Requirements 10.1–10.10
+Task 15.1 (optional) � Requirements 10.1�10.10
 
 Tests cover:
 - Each subcommand (static, dynamic, all, rules) with valid and invalid arguments
@@ -88,7 +88,7 @@ class TestVersionFlag:
 
     def test_version_prints_version_string(self):
         result = runner.invoke(app, ["--version"])
-        assert "mcp-scan" in result.output
+        assert "mcp-bandit" in result.output
 
     def test_version_package_not_found_prints_0_0_0(self):
         import importlib.metadata
@@ -128,7 +128,7 @@ class TestRulesSubcommand:
 
 
 # ---------------------------------------------------------------------------
-# `static` subcommand — exit codes
+# `static` subcommand � exit codes
 # ---------------------------------------------------------------------------
 
 
@@ -184,7 +184,7 @@ class TestStaticExitCodes:
 
 
 # ---------------------------------------------------------------------------
-# `static` subcommand — output formats
+# `static` subcommand � output formats
 # ---------------------------------------------------------------------------
 
 
@@ -219,7 +219,7 @@ class TestStaticOutputFormats:
         with _patch_scanner_static(result_obj):
             result = runner.invoke(app, ["static", "--path", str(tmp_path), "--format", "markdown"])
         assert result.exit_code == 1
-        assert "# mcp-scan Security Report" in result.output
+        assert "# mcp-bandit Security Report" in result.output
         assert "MCP001" in result.output
 
     def test_format_json_zero_findings(self, tmp_path):
@@ -247,7 +247,7 @@ class TestStaticOutputFormats:
 
 
 # ---------------------------------------------------------------------------
-# `static` subcommand — --severity and --rule flags
+# `static` subcommand � --severity and --rule flags
 # ---------------------------------------------------------------------------
 
 
@@ -288,7 +288,7 @@ class TestStaticFilters:
         )
         doc = json.loads(result.output)
         rule_ids = {f["rule_id"] for f in doc["findings"]}
-        # Only MCP001 (or no findings) — no other rule IDs
+        # Only MCP001 (or no findings) � no other rule IDs
         assert rule_ids <= {"MCP001"}
 
     def test_severity_critical_only(self, tmp_path):
@@ -309,7 +309,7 @@ class TestStaticFilters:
 
 
 # ---------------------------------------------------------------------------
-# `static` subcommand — --output flag
+# `static` subcommand � --output flag
 # ---------------------------------------------------------------------------
 
 
@@ -354,7 +354,7 @@ class TestStaticOutputFile:
 
 
 # ---------------------------------------------------------------------------
-# `dynamic` subcommand — exit codes
+# `dynamic` subcommand � exit codes
 # ---------------------------------------------------------------------------
 
 
@@ -390,7 +390,7 @@ class TestDynamicExitCodes:
 
 
 # ---------------------------------------------------------------------------
-# `dynamic` subcommand — output formats
+# `dynamic` subcommand � output formats
 # ---------------------------------------------------------------------------
 
 
@@ -422,11 +422,11 @@ class TestDynamicOutputFormats:
                 app, ["dynamic", "--target", "python server.py", "--format", "markdown"]
             )
         assert result.exit_code == 1
-        assert "# mcp-scan Security Report" in result.output
+        assert "# mcp-bandit Security Report" in result.output
 
 
 # ---------------------------------------------------------------------------
-# `dynamic` subcommand — --allow-destructive and --yes
+# `dynamic` subcommand � --allow-destructive and --yes
 # ---------------------------------------------------------------------------
 
 
@@ -441,7 +441,7 @@ class TestDynamicAllowDestructive:
                 ["dynamic", "--target", "python server.py", "--allow-destructive"],
                 input="n\n",
             )
-        # User said no → exit 0 (aborted, not an error)
+        # User said no ? exit 0 (aborted, not an error)
         assert result.exit_code == 0
 
     def test_allow_destructive_yes_skips_prompt(self):
@@ -468,7 +468,7 @@ class TestDynamicAllowDestructive:
 
 
 # ---------------------------------------------------------------------------
-# `all` subcommand — exit codes
+# `all` subcommand � exit codes
 # ---------------------------------------------------------------------------
 
 
@@ -511,7 +511,7 @@ class TestAllExitCodes:
 
 
 # ---------------------------------------------------------------------------
-# `all` subcommand — output formats
+# `all` subcommand � output formats
 # ---------------------------------------------------------------------------
 
 
@@ -546,11 +546,11 @@ class TestAllOutputFormats:
                 ["all", "--path", str(tmp_path), "--target", "python server.py", "--format", "markdown"],
             )
         assert result.exit_code == 1
-        assert "# mcp-scan Security Report" in result.output
+        assert "# mcp-bandit Security Report" in result.output
 
 
 # ---------------------------------------------------------------------------
-# `all` subcommand — --allow-destructive
+# `all` subcommand � --allow-destructive
 # ---------------------------------------------------------------------------
 
 
@@ -623,7 +623,7 @@ class TestConfigFlag:
         config_file = tmp_path / "mcp-scan.toml"
         config_file.write_text("")
 
-        # Config says INFO, CLI says HIGH — HIGH should win
+        # Config says INFO, CLI says HIGH � HIGH should win
         mock_config = ScanConfig(min_severity=Severity.INFO)
         captured_config = {}
 
@@ -669,7 +669,7 @@ class TestInvalidInput:
 
 
 # ---------------------------------------------------------------------------
-# _get_formatter helper — all four formatters instantiated correctly
+# _get_formatter helper � all four formatters instantiated correctly
 # ---------------------------------------------------------------------------
 
 
@@ -763,7 +763,7 @@ class TestBuildConfig:
 
 
 # ---------------------------------------------------------------------------
-# _load_config_file — FileNotFoundError branch
+# _load_config_file � FileNotFoundError branch
 # ---------------------------------------------------------------------------
 
 

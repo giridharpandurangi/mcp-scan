@@ -89,7 +89,7 @@ class SarifFormatter:
                 {
                     "tool": {
                         "driver": {
-                            "name": "mcp-scan",
+                            "name": "mcp-bandit",
                             "version": result.tool_version,
                             "rules": rules,
                         }

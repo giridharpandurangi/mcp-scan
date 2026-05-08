@@ -10,7 +10,7 @@ class MarkdownFormatter:
         """Render a ScanResult to a Markdown string."""
         lines: list[str] = []
 
-        lines.append("# mcp-scan Security Report")
+        lines.append("# mcp-bandit Security Report")
         lines.append("")
         lines.append(f"**Target:** `{result.target}`")
         lines.append(f"**Scan mode:** {result.scan_mode}")

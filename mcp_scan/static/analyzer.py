@@ -52,7 +52,7 @@ def _build_alias_map(tree: ast.AST) -> AliasMap:
 def _get_tool_version() -> str:
     """Return the installed package version, or '0.0.0' if not found."""
     try:
-        return importlib.metadata.version("mcp-scan")
+        return importlib.metadata.version("mcp-bandit")
     except importlib.metadata.PackageNotFoundError:
         return "0.0.0"
 

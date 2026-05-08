@@ -495,7 +495,7 @@ class TestGetToolVersionFallback:
         """_get_tool_version returns '0.0.0' when PackageNotFoundError is raised."""
         with patch(
             "mcp_scan.scanner.importlib.metadata.version",
-            side_effect=importlib.metadata.PackageNotFoundError("mcp-scan"),
+            side_effect=importlib.metadata.PackageNotFoundError("mcp-bandit"),
         ):
             version = _get_tool_version()
         assert version == "0.0.0"
@@ -541,7 +541,7 @@ class TestAnalyzerGetToolVersionFallback:
         with patch.object(
             _meta,
             "version",
-            side_effect=_meta.PackageNotFoundError("mcp-scan"),
+            side_effect=_meta.PackageNotFoundError("mcp-bandit"),
         ):
             version = _analyzer_mod._get_tool_version()
         assert version == "0.0.0"

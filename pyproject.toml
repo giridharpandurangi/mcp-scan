@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mcp-bandit"
-version = "0.1.0"
+version = "0.1.1"
 description = "Security scanner for Model Context Protocol (MCP) servers"
 readme = "README.md"
 license = { text = "MIT" }
@@ -33,7 +33,7 @@ Repository = "https://github.com/giridharpandurangi/mcp-scan"
 "Bug Tracker" = "https://github.com/giridharpandurangi/mcp-scan/issues"
 
 [project.scripts]
-mcp-scan = "mcp_scan.cli:app"
+mcp-bandit = "mcp_scan.cli:app"
 
 [project.optional-dependencies]
 dev = [

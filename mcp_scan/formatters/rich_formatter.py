@@ -31,7 +31,7 @@ class RichFormatter:
             return console.export_text()
 
         table = Table(
-            title=f"mcp-scan results — {result.target}",
+            title=f"mcp-bandit results — {result.target}",
             show_header=True,
             header_style="bold",
         )
