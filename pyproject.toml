@@ -4,9 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mcp-scan"
-version = "0.1.0b1"
+version = "0.1.0"
 description = "Security scanner for Model Context Protocol (MCP) servers"
 readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Giridhar Pandurangi", email = "giridharpandurangi@users.noreply.github.com" }]
 requires-python = ">=3.11"
 dependencies = [
     "mcp>=1.0.0",
