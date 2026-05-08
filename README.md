@@ -1,6 +1,37 @@
 # mcp-scan
 
+> **Beta** — install via `pip install mcp-audit`. API and rule set may change before the 0.1.0 stable release.
+
 Security scanner for Model Context Protocol (MCP) servers. Detects vulnerabilities via static AST analysis of Python source code and dynamic probing of live MCP servers.
+
+> 37% of public MCP servers have SSRF vulnerabilities and there's no equivalent of `npm audit` for the MCP ecosystem. mcp-audit fills that gap.
+
+## Installation
+
+```bash
+pip install mcp-audit
+# or
+uv add mcp-audit
+```
+
+Requires Python 3.11+.
+
+> **Note**: Until v0.1.0 stable ships to PyPI, install from source:
+> ```bash
+> git clone https://github.com/giridharpandurangi/mcp-scan
+> cd mcp-scan
+> pip install -e .
+> ```
+
+## Quickstart
+
+```bash
+# Scan a Python MCP server for vulnerabilities
+mcp-scan static --path my_server.py
+
+# Scan a whole directory, fail on HIGH+ findings
+mcp-scan static --path src/ --severity HIGH --format sarif
+```
 
 ## Detection Rules
 
@@ -18,16 +49,6 @@ Security scanner for Model Context Protocol (MCP) servers. Detects vulnerabiliti
 | MCP014 | Secrets | HIGH | Credential variable passed to `print()` or logging |
 | MCP020 | Prompt Injection | HIGH | Tool description contains non-Latin-1 Unicode (> U+00FF) |
 | MCP021 | Prompt Injection | HIGH | Tool description contains prompt injection phrases |
-
-## Installation
-
-```bash
-pip install mcp-scan
-# or
-uv add mcp-scan
-```
-
-Requires Python 3.11+.
 
 ## Usage
 

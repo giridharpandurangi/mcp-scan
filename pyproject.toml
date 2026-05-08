@@ -3,13 +3,22 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mcp-scan"
+name = "mcp-audit"
 version = "0.1.0"
 description = "Security scanner for Model Context Protocol (MCP) servers"
 readme = "README.md"
-license = { file = "LICENSE" }
-authors = [{ name = "Giridhar Pandurangi", email = "giridharpandurangi@users.noreply.github.com" }]
+license = { text = "MIT" }
+authors = [{ name = "giridharpandurangi" }]
 requires-python = ">=3.11"
+keywords = ["security", "mcp", "scanner", "static-analysis", "ssrf", "prompt-injection"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Security",
+]
 dependencies = [
     "mcp>=1.0.0",
     "httpx>=0.27.0",
@@ -17,6 +26,11 @@ dependencies = [
     "rich>=13.0.0",
     "typer>=0.12.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/giridharpandurangi/mcp-scan"
+Repository = "https://github.com/giridharpandurangi/mcp-scan"
+"Bug Tracker" = "https://github.com/giridharpandurangi/mcp-scan/issues"
 
 [project.scripts]
 mcp-scan = "mcp_scan.cli:app"
@@ -29,6 +43,9 @@ dev = [
     "pytest-asyncio>=0.23.0",
     "pytest-mock>=3.14.0",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["mcp_scan"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

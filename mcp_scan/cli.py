@@ -407,5 +407,5 @@ def main(
     """mcp-scan — Security scanner for Model Context Protocol (MCP) servers."""
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     app()
