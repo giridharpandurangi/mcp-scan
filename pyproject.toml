@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mcp-audit"
+name = "mcp-bandit"
 version = "0.1.0"
 description = "Security scanner for Model Context Protocol (MCP) servers"
 readme = "README.md"

@@ -1,6 +1,6 @@
 # mcp-scan
 
-> **Beta** — install via `pip install mcp-audit`. API and rule set may change before the 0.1.0 stable release.
+> **Beta** — install via `pip install mcp-bandit`. API and rule set may change before the 0.1.0 stable release.
 
 Security scanner for Model Context Protocol (MCP) servers. Detects vulnerabilities via static AST analysis of Python source code and dynamic probing of live MCP servers.
 
@@ -9,9 +9,9 @@ Security scanner for Model Context Protocol (MCP) servers. Detects vulnerabiliti
 ## Installation
 
 ```bash
-pip install mcp-audit
+pip install mcp-bandit
 # or
-uv add mcp-audit
+uv add mcp-bandit
 ```
 
 Requires Python 3.11+.
